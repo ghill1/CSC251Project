@@ -109,12 +109,16 @@ public class Policy
    {
       polWeight = pWeight;
    }
-                                   
+   /**
+      getPolicyNumber method will retrieve the value stored under polNumber variable
+   */
    public int getPolicyNumber()
    {
       return polNumber;         
    } 
-     
+   /**
+      getProviderName method retrieves the name stored under providerName variable
+   */
    public String getProviderName()
    {
       return providerName;
