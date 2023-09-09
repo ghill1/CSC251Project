@@ -10,17 +10,17 @@ public class Project_Giani_Hill
    public static void main(String[] args)
    {
       //variables to hold user input and pass as arguments to methods
-      int polNumber;
-      int polAge;
-      double polHeight;
-      double polWeight;
-      double userBMI;
-      String providerName;
-      String polFirstName;
-      String polLastName;
-      String polSmokingStatus;
+      private int polNumber;
+      private int polAge;
+      private double polHeight;
+      private double polWeight;
+      private double userBMI;
+      private String providerName;
+      private String polFirstName;
+      private String polLastName;
+      private String polSmokingStatus;
       
-      //create scanner object for user input
+      //create scanner object to read user input
       Scanner key = new Scanner(System.in);
       
       //prompt the user to enter all necessary information
