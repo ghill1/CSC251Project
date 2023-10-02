@@ -2,9 +2,9 @@ import java.util.*;
 import java.io.*;
 
 /**
-   this program will compute an insurance policy by creating an instance of the
-   Policy class and allowing the user to enter the required information and be 
-   presented with a unique insurance policy
+   this program will compute an insurance policy by reading policy information from the
+   PolicyInformation.txt file and creating an instance of the
+   Policy class for each policy on the file
 */
 public class Project_Giani_Hill
 {
@@ -18,13 +18,13 @@ public class Project_Giani_Hill
          //pass file as argument to Scanner constructer
          Scanner inputFile = new Scanner(file);   
             
-         //decale variables
+         //declare variables
          int polNumber = 0, polAge = 0, sCount = 0, nsCount = 0;
          double polHeight = 0.0, polWeight = 0.0, userBMI = 0.0;
          String providerName= "", polFirstName = "", polLastName = "", polSmokingStatus = "";   
          String s = "smoker", S = "Smoker", ns = "non-smoker";
          
-         //create array list to store Policy objects
+         //create an array list to store Policy objects
          ArrayList<Policy> policyList = new ArrayList<Policy>(); 
          
          while (inputFile.hasNext())
