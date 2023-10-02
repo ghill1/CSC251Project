@@ -203,6 +203,8 @@ public class Policy
       final int HUNDRED = 100;
       double feeBMI;
       policyPrice = 600;
+      String s = "smoker";
+      String S = "Smoker";
       
       
       if(polAge > FIFTY)
@@ -210,7 +212,7 @@ public class Policy
          policyPrice += SEVENTYFIVE;
       }
       
-      if(polSmokingStatus == "smoker" || polSmokingStatus == "Smoker")
+      if(polSmokingStatus.equals(s) || polSmokingStatus.equals(S))
       {
          policyPrice += HUNDRED;
       }
