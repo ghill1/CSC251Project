@@ -19,9 +19,10 @@ public class Project_Giani_Hill
          Scanner inputFile = new Scanner(file);   
             
          //decale variables
-         int polNumber = 0, polAge = 0;
+         int polNumber = 0, polAge = 0, sCount = 0, nsCount = 0;
          double polHeight = 0.0, polWeight = 0.0, userBMI = 0.0;
          String providerName= "", polFirstName = "", polLastName = "", polSmokingStatus = "";   
+         String s = "smoker", S = "Smoker", ns = "non-smoker";
          
          //create array list to store Policy objects
          ArrayList<Policy> policyList = new ArrayList<Policy>(); 
@@ -47,6 +48,12 @@ public class Project_Giani_Hill
                inputFile.nextLine();
                inputFile.nextLine();
             }
+            
+            if (polSmokingStatus.equals(s) || polSmokingStatus.equals(S))
+               sCount++;
+            if (polSmokingStatus.equals(ns))
+               nsCount++;   
+            
          
             //create instance of Policy class and pass variables as arguments to the Policy contructor
             //p is a reference variable for the object that is created and will be stored in an array list 
@@ -75,13 +82,17 @@ public class Project_Giani_Hill
             System.out.printf("Policy Price: $%,.2f\n", policyList.get(i).getPolicyPrice()); 
          
          }//for loop ends
+         
+         //display ammount of policies for smokers and non-smokers
+         System.out.print("\nThe number of policies with a smoker is: " + sCount + "\n");
+         System.out.print("The number of policies with a non-smoker is: " +nsCount + "\n");
 
 
-      }//try
+      }//close try
       
       catch(IOException ex)//If something goes wrong, a message will be displayed explaining why
       {
-         //use the getMessage method of the exception we "caught" to print out it's message about what went wrong
+         //use the getMessage method to print out it's message about what went wrong
          System.out.println("Something went wrong reading the file: " + ex.getMessage());
       }      
 
