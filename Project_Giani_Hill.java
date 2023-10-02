@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 /**
    this program will compute an insurance policy by creating an instance of the
@@ -9,62 +10,92 @@ public class Project_Giani_Hill
 {
    public static void main(String[] args)
    {
-      //variables to hold user input and pass as arguments to methods
-      private int polNumber;
-      private int polAge;
-      private double polHeight;
-      private double polWeight;
-      private double userBMI;
-      private String providerName;
-      private String polFirstName;
-      private String polLastName;
-      private String polSmokingStatus;
+      try
+      {
+         //create instance of File class
+         File file = new File("PolicyInformation.txt");
+         
+         //pass file as argument to Scanner constructer
+         Scanner inputFile = new Scanner(file);   
+            
+         //decale variables
+         int polNumber = 0, polAge = 0, sCount = 0, nsCount = 0;
+         double polHeight = 0.0, polWeight = 0.0, userBMI = 0.0;
+         String providerName= "", polFirstName = "", polLastName = "", polSmokingStatus = "";   
+         String s = "smoker", S = "Smoker", ns = "non-smoker";
+         
+         //create array list to store Policy objects
+         ArrayList<Policy> policyList = new ArrayList<Policy>(); 
+         
+         while (inputFile.hasNext())
+         {
+         
+            //read file and assign policy information to variables
+            //consume newline character after nextInt() or nextdouble()
+            polNumber = inputFile.nextInt();
+            inputFile.nextLine();
+            providerName = inputFile.nextLine();
+            polFirstName = inputFile.nextLine();
+            polLastName = inputFile.nextLine();
+            polAge = inputFile.nextInt();
+            inputFile.nextLine();
+            polSmokingStatus = inputFile.nextLine();
+            polHeight = inputFile.nextDouble();
+            polWeight = inputFile.nextDouble();
+            
+            if (inputFile.hasNext())
+            {
+               inputFile.nextLine();
+               inputFile.nextLine();
+            }
+            
+            if (polSmokingStatus.equals(s) || polSmokingStatus.equals(S))
+               sCount++;
+            if (polSmokingStatus.equals(ns))
+               nsCount++;   
+            
+         
+            //create instance of Policy class and pass variables as arguments to the Policy contructor
+            //p is a reference variable for the object that is created and will be stored in an array list 
+            Policy p = new Policy(polNumber, providerName, polFirstName, polLastName, polAge, polSmokingStatus, polHeight, polWeight);
+            
+            //add Policy objects to the ArrayList
+            policyList.add(p);
+         }//close while loop
+         
+         //close file
+         inputFile.close();
+         
+         //use a for loop to display output
+         for (int i = 0; i < policyList.size(); i++)
+         {
+            //display all the user's entered information as well as their calculated BMI and policy price
+            System.out.print("\nPolicy Number: " + policyList.get(i).getPolicyNumber() + "\n");
+            System.out.print("Provider Name: " + policyList.get(i).getProviderName() + "\n");
+            System.out.print("Policyholder's First Name: " + policyList.get(i).getFirstName() + "\n");
+            System.out.print("Policyholder's Last Name: " + policyList.get(i).getLastName() + "\n");
+            System.out.print("Policyholder's Age: " + policyList.get(i).getAge() + "\n");
+            System.out.print("Policyholder's Smoking Status: " + policyList.get(i).getSmokeStatus() + "\n");
+            System.out.print("Policyholder's Height: " + policyList.get(i).getHeight() + " inches\n");
+            System.out.print("Policyholder's Weight: " + policyList.get(i).getWeight() + " pounds\n");
+            System.out.printf("Policyholder's BMI: %.2f\n", policyList.get(i).getBMI());
+            System.out.printf("Policy Price: $%,.2f\n", policyList.get(i).getPolicyPrice()); 
+         
+         }//for loop ends
+         
+         //display ammount of policies for smokers and non-smokers
+         System.out.print("\nThe number of policies with a smoker is: " + sCount + "\n");
+         System.out.print("The number of policies with a non-smoker is: " +nsCount + "\n");
+
+
+      }//close try
       
-      //create scanner object to read user input
-      Scanner key = new Scanner(System.in);
-      
-      //prompt the user to enter all necessary information
-      System.out.print("Please enter the Policy number: ");
-      polNumber = key.nextInt();
-      
-      System.out.print("Please enter the Provider's name: ");
-      key.nextLine();
-      providerName = key.nextLine();
-      
-      System.out.print("Please enter the Policyholder's First name: ");
-      polFirstName = key.nextLine();
-      
-      System.out.print("Please enter the Policyholder's Last name: ");
-      polLastName = key.nextLine();
-      
-      System.out.print("Please enter the Policyholder's Age: ");
-      polAge = key.nextInt();
-      
-      System.out.print("Please enter the Policyholder's Smoking status (smoker/non-smoker): ");
-      key.nextLine();
-      polSmokingStatus = key.nextLine();
-      
-      System.out.print("Please enter the Policyholder's Height (in inches): ");
-      polHeight = key.nextDouble();
-      
-      System.out.print("Please enter the Policyholder's Weight (in pounds): ");
-      polWeight = key.nextDouble();
-      
-      //create instance of Policy class Policy1 and pass user input as arguments
-      Policy Policy1 = new Policy(polNumber, providerName, polFirstName, polLastName, polAge, polSmokingStatus, polHeight, polWeight);
-      
-      //display all the user's entered information as well as their calculated BMI and policy price
-      System.out.print("\nPolicy Number: " + Policy1.getPolicyNumber() + "\n");
-      System.out.print("Provider Name: " + Policy1.getProviderName() + "\n");
-      System.out.print("Policyholder's First Name: " + Policy1.getFirstName() + "\n");
-      System.out.print("Policyholder's Last Name: " + Policy1.getLastName() + "\n");
-      System.out.print("Policyholder's Age: " + Policy1.getAge() + "\n");
-      System.out.print("Policyholder's Smoking Status: " + Policy1.getSmokeStatus() + "\n");
-      System.out.print("Policyholder's Height: " + Policy1.getHeight() + " inches\n");
-      System.out.print("Policyholder's Weight: " + Policy1.getWeight() + " pounds\n");
-      System.out.printf("Policyholder's BMI: %.2f\n", Policy1.getBMI());
-      System.out.printf("Policy Price: $%,.2f\n", Policy1.getPolicyPrice()); 
-      
+      catch(IOException ex)//If something goes wrong, a message will be displayed explaining why
+      {
+         //use the getMessage method to print out it's message about what went wrong
+         System.out.println("Something went wrong reading the file: " + ex.getMessage());
+      }      
+
    }//end main
    
       
