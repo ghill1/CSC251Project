@@ -20,7 +20,7 @@ public class Project_Giani_Hill
       private String polLastName;
       private String polSmokingStatus;
       
-      //create scanner object for user input
+      //create scanner object to read user input
       Scanner key = new Scanner(System.in);
       
       //prompt the user to enter all necessary information

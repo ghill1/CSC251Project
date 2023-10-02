@@ -1,3 +1,7 @@
+/**
+   the Policy class accepts a policyholder's information and creates an individual insurance policy
+   displaying the information entered as well as the policyholder's BMI and price of their policy
+*/
 public class Policy
 {
    private int polNumber; //policy number
@@ -109,54 +113,87 @@ public class Policy
    {
       polWeight = pWeight;
    }
-                                   
+   /**
+      getPolicyNumber method retrieves the value stored under polNumber variable
+      @return polNumber policy number
+   */
    public int getPolicyNumber()
    {
       return polNumber;         
    } 
-     
+   /**
+      getProviderName method retrieves the name stored under providerName variable
+      @return providerName name of insurance provider
+   */
    public String getProviderName()
    {
       return providerName;
    } 
-     
+   /**
+      the getFirstName method retrieves the policyholder's first name
+      @return polFirstName
+   */
    public String getFirstName()
    {
       return polFirstName;
    } 
-    
+   /**
+      the getLastName method retrieves the policyholder's last name
+      @return polLastName
+   */
    public String getLastName()
    {  
       return polLastName;
    } 
-     
+   /**
+      the getAge method retrieves the policyholder's age
+      @return polAge the policyholder's age
+   */
    public int getAge()
    {
       return polAge;
    } 
-     
+   /**
+      the getSmokeStatus method retrieves the policyholder's smoking status
+      @return polSmokingStatus policyholder's smoking status
+   */   
    public String getSmokeStatus()
    {
       return polSmokingStatus;
    } 
-     
+   /**
+      the getheight method retrieves the policyholder's height
+      @return polHeight the policyholder's height
+   */
    public double getHeight()
    {
       return polHeight;
    } 
-    
+   /**
+      the getWeight method retrieves the policyholder's weight
+      @return polWeight the policyholder's weight
+   */
    public double getWeight()
    {
       return polWeight;
    } 
-   
+   /**
+      the getBMI method uses the formula below to calculate the
+      policyholder's BMI and return the value
+      @return userBMI the policyholder's BMI
+   */
    public double getBMI()     
    {
       final int SEVENHUNDREDTHREE = 703;
       userBMI = (polWeight * SEVENHUNDREDTHREE) / (polHeight * polHeight);
       return userBMI;
    }
-   
+   /**
+      the getPolicyPrice determines the price the policyholder will have to pay
+      for policy. the base price is $600 and will be altered based on factors
+      listed in the if statements below
+      @returnPolicyPrice the calculated price of policy
+   */
    public double getPolicyPrice()
    {
       final int TWENTY = 20;
