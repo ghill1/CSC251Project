@@ -143,5 +143,17 @@ public class PolicyHolder
       userBMI = (polWeight * SEVENHUNDREDTHREE) / (polHeight * polHeight);
       return userBMI;
    }
-   
+   /**
+      the toString method will return a string containing the policyholder's inofrmation
+      @return a string containing policyholder information
+   */
+   public String toString()
+   {
+      return String.format("Policyholder's First Name:" + polFirstName +
+                           "\nPolicyholder's Last Name" + polLastName + 
+                           "\nPolicyholder's Age" + polAge +
+                           "\nPolicyholder's Smoking Status:" + polSmokingStatus + 
+                           "\nPolicyholder's Height:" + polHeight +
+                           "\nPolicyholder's Weight:" + polWeight);
+   }
 }
