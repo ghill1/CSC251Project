@@ -37,6 +37,18 @@ public class PolicyHolder
       polWeight = pWeight; 
    }  
    /**
+      copy constuctor, use to copy PolicyObjects to a new PolicyObject
+   */
+   public PolicyHolder(PolicyHolder object2)
+   {
+      polFirstName = object2.polFirstName;
+      polLastName = object2.polLastName;
+      polAge = object2.polAge;
+      polSmokingStatus = object2.polSmokingStatus;
+      polHeight = object2.polHeight;
+      polWeight = object2.polWeight;
+   }
+   /**
       setFirstName method will change the value of polFirstName
       @param fName policyholder's first name
    */ 
@@ -144,16 +156,16 @@ public class PolicyHolder
       return userBMI;
    }
    /**
-      the toString method will return a string containing the policyholder's inofrmation
+      the toString method will return a string containing the policyholder's information
       @return a string containing policyholder information
    */
    public String toString()
    {
-      return String.format("Policyholder's First Name:" + polFirstName +
-                           "\nPolicyholder's Last Name" + polLastName + 
-                           "\nPolicyholder's Age" + polAge +
-                           "\nPolicyholder's Smoking Status:" + polSmokingStatus + 
-                           "\nPolicyholder's Height:" + polHeight +
-                           "\nPolicyholder's Weight:" + polWeight);
+      return String.format("Policyholder's First Name: " + polFirstName +
+                           "\nPolicyholder's Last Name: " + polLastName + 
+                           "\nPolicyholder's Age: " + polAge +
+                           "\nPolicyholder's Smoking Status (Y/N): " + polSmokingStatus + 
+                           "\nPolicyholder's Height: " + polHeight + " inches" +
+                           "\nPolicyholder's Weight: " + polWeight + " pounds");
    }
 }

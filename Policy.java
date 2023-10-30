@@ -1,6 +1,6 @@
 /**
-   the Policy class accepts a policyholder's information and creates an individual insurance policy
-   displaying the information entered as well as the policyholder's BMI and price of their policy
+   the Policy class accepts a PolicyHolder object containing the policyholder's information
+   as well as the policy number and insurance provider to create an individual policy
 */
 public class Policy
 {
@@ -8,7 +8,7 @@ public class Policy
    private double policyPrice; //price of policy with all fees included
    private String providerName; //insurance provider
    private static int instanceCount; //accumulator to track number of Policy objects created
-   
+   private PolicyHolder policyHolder; //create PolicyHolder object to copy other PolicyHolder objects
    /**
       constructor that accepts all necessary arguments 
       @param pNum policy number
@@ -20,15 +20,8 @@ public class Policy
       polNumber = pNum;
       providerName = pName;
       policyHolder = new PolicyHolder(holder);
+      instanceCount++;//increment instanceCount to keep rack of the number of policies created
    }      
-   /**
-      constructor that increments the static field instanceCount and
-      keeps track of the number of instances of the Policy class created
-   */
-   public static int Policy()
-   {
-      instanceCount++
-   } 
    /**
       setPolicyNumber method will change the value of polNumber
       @param pNumber policy number
@@ -49,7 +42,7 @@ public class Policy
       setPolicyHolder method will create a PolicyHolder object
       @param holder - a PolicyHolder object
    */
-   public setPolicyHolder(PolicyHolder holder)
+   public void setPolicyHolder(PolicyHolder holder)
    {
       policyHolder = new PolicyHolder(holder);
    }
@@ -70,12 +63,12 @@ public class Policy
       return providerName;
    } 
    /**
-      getPolicyHolder method returns a refernce to this policy's PolicyHolder object
+      getPolicyHolder method returns a reference to this policy's PolicyHolder object
       @return this policy's PolicyHolder object
    */
-   public getPolicyHolder()
+   public PolicyHolder getPolicyHolder()
    {
-      return new PolicyHolder(policyHolder)
+      return new PolicyHolder(policyHolder);
    }
    /**
       the getPolicyPrice determines the price the policyholder will have to pay
@@ -94,6 +87,9 @@ public class Policy
       policyPrice = 600;
       String s = "smoker";
       String S = "Smoker";
+      int polAge = policyHolder.getAge(); //assign the policyholder's age to polAge
+      String polSmokingStatus = policyHolder.getSmokeStatus(); //assign the policyholder's smoking status to polSmokingStatus
+      double userBMI = policyHolder.getBMI(); //assign the policyholder's BMI to userBMI
       
       
       if(polAge > FIFTY)
@@ -129,10 +125,10 @@ public class Policy
    */
    public String toString()
    {
-      return String.format("Policy Number:" + polNumber +
-                           "\nProvider Name:" + providerName +
-                           "\n" + policyHolder.toString +
-                           "\n" + policyHolder.getBMI() +
-                           "\nPolicy Price:$ %.2f", getPolicyPrice());
+      return String.format("Policy Number: " + polNumber +
+                           "\nProvider Name: " + providerName +
+                           "\n" + policyHolder.toString() +
+                           "\nPolicyholder's BMI: %.2f" +
+                           "\nPolicy Price: $%.2f",policyHolder.getBMI(), getPolicyPrice());
    }
 }
