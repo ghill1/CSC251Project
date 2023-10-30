@@ -2,9 +2,10 @@ import java.util.*;
 import java.io.*;
 
 /**
-   this program will compute an insurance policy by reading policy information from the
-   PolicyInformation.txt file and creating an instance of the
-   Policy class for each policy on the file
+  this program will compute Insurance Policies by reading each person's information and
+  making an individual poilicy for each person, displaying each individual policy at the 
+  end of the program as well as the number of policies created,the number of smokers and 
+  the numbers non-smokers
 */
 public class Project_Giani_Hill
 {
@@ -27,9 +28,9 @@ public class Project_Giani_Hill
          //create an array list to store Policy objects
          ArrayList<Policy> policyList = new ArrayList<Policy>(); 
          
+         //open while loop to read information until all lines are read
          while (inputFile.hasNext())
-         {
-         
+         {        
             //read file and assign policy information to variables
             //consume newline character after nextInt() or nextdouble()
             polNumber = inputFile.nextInt();
@@ -43,21 +44,25 @@ public class Project_Giani_Hill
             polHeight = inputFile.nextDouble();
             polWeight = inputFile.nextDouble();
             
+            //clear buffer to continue reading the next line
             if (inputFile.hasNext())
             {
                inputFile.nextLine();
                inputFile.nextLine();
             }
             
+            //use if statement to increment smoker/non-smoker count
             if (polSmokingStatus.equals(s) || polSmokingStatus.equals(S))
                sCount++;
             if (polSmokingStatus.equals(ns))
                nsCount++;   
             
+            //create PolicyHolder object and store Policyholder's information
+            PolicyHolder policy = new PolicyHolder(polFirstName, polLastName, polAge, polSmokingStatus, polHeight, polWeight);
          
-            //create instance of Policy class and pass variables as arguments to the Policy contructor
+            //create a policy object to store the Policyholder's information as well as the policy number and insurance provider
             //p is a reference variable for the object that is created and will be stored in an array list 
-            Policy p = new Policy(polNumber, providerName, polFirstName, polLastName, polAge, polSmokingStatus, polHeight, polWeight);
+            Policy p = new Policy(polNumber, providerName, policy);
             
             //add Policy objects to the ArrayList
             policyList.add(p);
@@ -69,24 +74,17 @@ public class Project_Giani_Hill
          //use a for loop to display output
          for (int i = 0; i < policyList.size(); i++)
          {
-            //display all the user's entered information as well as their calculated BMI and policy price
-            System.out.print("\nPolicy Number: " + policyList.get(i).getPolicyNumber() + "\n");
-            System.out.print("Provider Name: " + policyList.get(i).getProviderName() + "\n");
-            System.out.print("Policyholder's First Name: " + policyList.get(i).getFirstName() + "\n");
-            System.out.print("Policyholder's Last Name: " + policyList.get(i).getLastName() + "\n");
-            System.out.print("Policyholder's Age: " + policyList.get(i).getAge() + "\n");
-            System.out.print("Policyholder's Smoking Status: " + policyList.get(i).getSmokeStatus() + "\n");
-            System.out.print("Policyholder's Height: " + policyList.get(i).getHeight() + " inches\n");
-            System.out.print("Policyholder's Weight: " + policyList.get(i).getWeight() + " pounds\n");
-            System.out.printf("Policyholder's BMI: %.2f\n", policyList.get(i).getBMI());
-            System.out.printf("Policy Price: $%,.2f\n", policyList.get(i).getPolicyPrice()); 
-         
+            System.out.println(policyList.get(i));
+            System.out.println();    
          }//for loop ends
+         
+         //display number of Policy objects created
+         System.out.println("There were " + Policy.getInstanceCount() + 
+                            " Policy objects created.");
          
          //display ammount of policies for smokers and non-smokers
          System.out.print("\nThe number of policies with a smoker is: " + sCount + "\n");
          System.out.print("The number of policies with a non-smoker is: " +nsCount + "\n");
-
 
       }//close try
       

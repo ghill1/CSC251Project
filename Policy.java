@@ -1,54 +1,27 @@
 /**
-   the Policy class accepts a policyholder's information and creates an individual insurance policy
-   displaying the information entered as well as the policyholder's BMI and price of their policy
+   the Policy class accepts a PolicyHolder object containing the policyholder's information
+   as well as the policy number and insurance provider to create an individual policy
 */
 public class Policy
 {
    private int polNumber; //policy number
-   private int polAge;  //policyholder's age
-   private double polHeight; //policyholder's height
-   private double polWeight; //policyholder's weight
-   private double userBMI; //policyholder's BMI (body mass index)
    private double policyPrice; //price of policy with all fees included
    private String providerName; //insurance provider
-   private String polFirstName; //policyholder's first name
-   private String polLastName; //policyholder's last name
-   private String polSmokingStatus; //policyholder's smoking status
-   
-   //no-arg constructor, sets all fields to default value
-   public Policy()
-   {  
-      polNumber = 0;
-      polAge = 0;
-      polHeight = 0;
-      polWeight = 0;
-      providerName = " ";
-      polFirstName = " ";
-      polLastName = " ";
-      polSmokingStatus = " ";
-   }   
+   private static int instanceCount; //accumulator to track number of Policy objects created
+   private PolicyHolder policyHolder; //create PolicyHolder object to copy other PolicyHolder objects
    /**
       constructor that accepts all necessary arguments 
       @param pNum policy number
       @param pName insurance provider 
-      @param fName policyholder's first name
-      @param lName policyholder's last name
-      @param pAge policyholder's age
-      @param smokeStatus policyholder's smoking status
-      @param pHeight policyholder's height
-      @param pWeight policyholder's weight
+      @param holder a PolicyHolder object
    */      
-   public Policy(int pNum, String pName, String fName,String lName,int pAge,String smokeStatus, double pHeight, double pWeight)
+   public Policy(int pNum, String pName, PolicyHolder holder)
    {
       polNumber = pNum;
       providerName = pName;
-      polFirstName = fName;
-      polLastName = lName;
-      polAge = pAge;
-      polSmokingStatus = smokeStatus;
-      polHeight = pHeight;
-      polWeight = pWeight; 
-   }       
+      policyHolder = new PolicyHolder(holder);
+      instanceCount++;//increment instanceCount to keep rack of the number of policies created
+   }      
    /**
       setPolicyNumber method will change the value of polNumber
       @param pNumber policy number
@@ -66,52 +39,12 @@ public class Policy
       providerName = pName;
    }
    /**
-      setFirstName method will change the value of polFirstName
-      @param fName policyholder's first name
-   */ 
-   public void setFirstName(String fName)
-   {
-      polFirstName = fName;
-   }
-   /**
-      setLastName method will change the value of polLastName
-      @param lName policyholder's last name
+      setPolicyHolder method will create a PolicyHolder object
+      @param holder - a PolicyHolder object
    */
-   public void setLastName(String lName)
+   public void setPolicyHolder(PolicyHolder holder)
    {
-      polLastName = lName;
-   }
-   /**
-      setAge method will change the value of polAge
-      @param pAge
-   */ 
-   public void setAge(int pAge)
-   {
-      polAge = pAge;
-   }
-   /**
-      setSmokingStatus method will change the policyholder's smoking status
-      @param smokeStatus
-   */
-   public void setSmokingStatus(String smokeStatus)
-   {
-      polSmokingStatus = smokeStatus;
-   }
-   /**
-      setHeight method will change the value of polHeight
-      @param pHeight policyholder's height
-   */
-   public void setHeight(double pHeight)
-   {
-      polHeight = pHeight;
-   }
-   /**
-      setWeight method will change the value of polWeight
-      @param pWeight policyholder's weight
-   */
-   public void setWeight(double pWeight)
-   {
-      polWeight = pWeight;
+      policyHolder = new PolicyHolder(holder);
    }
    /**
       getPolicyNumber method retrieves the value stored under polNumber variable
@@ -130,63 +63,12 @@ public class Policy
       return providerName;
    } 
    /**
-      the getFirstName method retrieves the policyholder's first name
-      @return polFirstName
+      getPolicyHolder method returns a reference to this policy's PolicyHolder object
+      @return this policy's PolicyHolder object
    */
-   public String getFirstName()
+   public PolicyHolder getPolicyHolder()
    {
-      return polFirstName;
-   } 
-   /**
-      the getLastName method retrieves the policyholder's last name
-      @return polLastName
-   */
-   public String getLastName()
-   {  
-      return polLastName;
-   } 
-   /**
-      the getAge method retrieves the policyholder's age
-      @return polAge the policyholder's age
-   */
-   public int getAge()
-   {
-      return polAge;
-   } 
-   /**
-      the getSmokeStatus method retrieves the policyholder's smoking status
-      @return polSmokingStatus policyholder's smoking status
-   */   
-   public String getSmokeStatus()
-   {
-      return polSmokingStatus;
-   } 
-   /**
-      the getheight method retrieves the policyholder's height
-      @return polHeight the policyholder's height
-   */
-   public double getHeight()
-   {
-      return polHeight;
-   } 
-   /**
-      the getWeight method retrieves the policyholder's weight
-      @return polWeight the policyholder's weight
-   */
-   public double getWeight()
-   {
-      return polWeight;
-   } 
-   /**
-      the getBMI method uses the formula below to calculate the
-      policyholder's BMI and return the value
-      @return userBMI the policyholder's BMI
-   */
-   public double getBMI()     
-   {
-      final int SEVENHUNDREDTHREE = 703;
-      userBMI = (polWeight * SEVENHUNDREDTHREE) / (polHeight * polHeight);
-      return userBMI;
+      return new PolicyHolder(policyHolder);
    }
    /**
       the getPolicyPrice determines the price the policyholder will have to pay
@@ -205,6 +87,9 @@ public class Policy
       policyPrice = 600;
       String s = "smoker";
       String S = "Smoker";
+      int polAge = policyHolder.getAge(); //assign the policyholder's age to polAge
+      String polSmokingStatus = policyHolder.getSmokeStatus(); //assign the policyholder's smoking status to polSmokingStatus
+      double userBMI = policyHolder.getBMI(); //assign the policyholder's BMI to userBMI
       
       
       if(polAge > FIFTY)
@@ -223,5 +108,27 @@ public class Policy
          policyPrice += feeBMI;
       }
       return policyPrice;  
+   }
+   /**
+      the getInstanceCount method returns the number of instances of
+      the Policy class that was created
+      @return the number of instances created
+   */
+   public static int getInstanceCount()
+   {
+      return instanceCount;
+   }
+   /**
+      the toString method will return a string containing all Policyholder's information
+      as well as the policy number, insurance provider and policy price
+      @return - a string containing all poilcy information
+   */
+   public String toString()
+   {
+      return String.format("Policy Number: " + polNumber +
+                           "\nProvider Name: " + providerName +
+                           "\n" + policyHolder.toString() +
+                           "\nPolicyholder's BMI: %.2f" +
+                           "\nPolicy Price: $%.2f",policyHolder.getBMI(), getPolicyPrice());
    }
 }
