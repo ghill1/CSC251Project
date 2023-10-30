@@ -1,3 +1,7 @@
+/**
+   the PolicyHolder class will accept a policyholder's information needed to create insurance policy
+   PolicyHolder objects will be used to create Policy objects which will hold each indivual insurance policy
+*/
 public class PolicyHolder
 {
    private int polAge;  //policyholder's age
