@@ -8,21 +8,17 @@ public class Policy
    private double policyPrice; //price of policy with all fees included
    private String providerName; //insurance provider
    
-   //no-arg constructor, sets all fields to default value
-   public Policy()
-   {  
-      polNumber = 0;
-      providerName = " ";
-   }   
    /**
       constructor that accepts all necessary arguments 
       @param pNum policy number
       @param pName insurance provider 
+      @param holder a PolicyHolder object
    */      
-   public Policy(int pNum, String pName)
+   public Policy(int pNum, String pName, PolicyHolder holder)
    {
       polNumber = pNum;
       providerName = pName;
+      policyHolder = new PolicyHolder(holder);
    }       
    /**
       setPolicyNumber method will change the value of polNumber
@@ -91,5 +87,18 @@ public class Policy
          policyPrice += feeBMI;
       }
       return policyPrice;  
+   }
+   /*
+      the toString method will return a string containing all Policyholder's information
+      as well as the policy number, insurance provider and policy price
+      @return - a string containing all poilcy information
+   */
+   public String toString()
+   {
+      return String.format("Policy Number:" + polNumber +
+                           "\nProvider Name:" + providerName +
+                           "\n" + policyHolder.toString +
+                           "\n" + policyHolder.getBMI() +
+                           "\nPolicy Price:$ %.2f", getPolicyPrice());
    }
 }
