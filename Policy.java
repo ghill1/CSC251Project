@@ -7,6 +7,7 @@ public class Policy
    private int polNumber; //policy number
    private double policyPrice; //price of policy with all fees included
    private String providerName; //insurance provider
+   private static int instanceCount; //accumulator to track number of Policy objects created
    
    /**
       constructor that accepts all necessary arguments 
@@ -19,7 +20,15 @@ public class Policy
       polNumber = pNum;
       providerName = pName;
       policyHolder = new PolicyHolder(holder);
-   }       
+   }      
+   /**
+      constructor that increments the static field instanceCount and
+      keeps track of the number of instances of the Policy class created
+   */
+   public static int Policy()
+   {
+      instanceCount++
+   } 
    /**
       setPolicyNumber method will change the value of polNumber
       @param pNumber policy number
@@ -37,6 +46,14 @@ public class Policy
       providerName = pName;
    }
    /**
+      setPolicyHolder method will create a PolicyHolder object
+      @param holder - a PolicyHolder object
+   */
+   public setPolicyHolder(PolicyHolder holder)
+   {
+      policyHolder = new PolicyHolder(holder);
+   }
+   /**
       getPolicyNumber method retrieves the value stored under polNumber variable
       @return polNumber policy number
    */
@@ -52,6 +69,14 @@ public class Policy
    {
       return providerName;
    } 
+   /**
+      getPolicyHolder method returns a refernce to this policy's PolicyHolder object
+      @return this policy's PolicyHolder object
+   */
+   public getPolicyHolder()
+   {
+      return new PolicyHolder(policyHolder)
+   }
    /**
       the getPolicyPrice determines the price the policyholder will have to pay
       for policy. the base price is $600 and will be altered based on factors
@@ -88,7 +113,16 @@ public class Policy
       }
       return policyPrice;  
    }
-   /*
+   /**
+      the getInstanceCount method returns the number of instances of
+      the Policy class that was created
+      @return the number of instances created
+   */
+   public static int getInstanceCount()
+   {
+      return instanceCount;
+   }
+   /**
       the toString method will return a string containing all Policyholder's information
       as well as the policy number, insurance provider and policy price
       @return - a string containing all poilcy information
