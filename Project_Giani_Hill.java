@@ -2,10 +2,10 @@ import java.util.*;
 import java.io.*;
 
 /**
-   this program will compute Insurance Policies by reading each person's information and
-   making an individual poilicy for each person, displaying each individual policy at the 
-   end of the program as well as the number of policies created,the number of smokers and 
-   the numbers non-smokers 
+  this program will compute Insurance Policies by reading each person's information and
+  making an individual poilicy for each person, displaying each individual policy at the 
+  end of the program as well as the number of policies created,the number of smokers and 
+  the numbers non-smokers
 */
 public class Project_Giani_Hill
 {
@@ -19,13 +19,13 @@ public class Project_Giani_Hill
          //pass file as argument to Scanner constructer
          Scanner inputFile = new Scanner(file);   
             
-         //decale variables
+         //declare variables
          int polNumber = 0, polAge = 0, sCount = 0, nsCount = 0;
          double polHeight = 0.0, polWeight = 0.0, userBMI = 0.0;
          String providerName= "", polFirstName = "", polLastName = "", polSmokingStatus = "";   
          String s = "smoker", S = "Smoker", ns = "non-smoker";
          
-         //create array list to store Policy objects
+         //create an array list to store Policy objects
          ArrayList<Policy> policyList = new ArrayList<Policy>(); 
          
          //open while loop to read information until all lines are read
